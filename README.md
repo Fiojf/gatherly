@@ -37,7 +37,8 @@ A client-side task tracker for Minecraft. Create to-do lists, track item collect
 - Billboard-style waypoint markers rendered in the world
 - Label, colored letter, and distance displayed at the bookmark position
 - Distance-based scaling and alpha fading
-- Renders up to 500 blocks away
+- No distance limit — visible at any range
+- Toggle all markers on/off with **O**
 
 ### HUD Overlay
 - Compact always-visible overlay showing active tasks and progress
@@ -72,6 +73,7 @@ A client-side task tracker for Minecraft. Create to-do lists, track item collect
 |-----|--------|
 | **K** | Open Gatherly screen |
 | **Shift+K** | Toggle HUD overlay |
+| **O** | Toggle world markers |
 | **Ctrl+Z** | Undo |
 | **Ctrl+Y** | Redo |
 
