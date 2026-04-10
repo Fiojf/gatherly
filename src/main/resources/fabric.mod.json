@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "gatherly",
+  "version": "${version}",
+  "name": "Gatherly",
+  "description": "A polished client-side to-do list for Minecraft.",
+  "authors": ["Fiojf"],
+  "contact": {},
+"license": "LGPL-3.0-only",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.example.gatherly.GatherlyMod"],
+    "modmenu": ["com.example.gatherly.GatherlyModMenuIntegration"]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.6",
+    "minecraft": ">=26.1",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
