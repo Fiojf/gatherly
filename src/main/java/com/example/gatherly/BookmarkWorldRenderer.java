@@ -24,12 +24,23 @@ public class BookmarkWorldRenderer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("Gatherly");
     private static boolean loggedOnce = false;
+    private static boolean markersVisible = true;
+
+    public static void toggleMarkers() {
+        markersVisible = !markersVisible;
+    }
+
+    public static boolean areMarkersVisible() {
+        return markersVisible;
+    }
 
     public static void register() {
         LevelRenderEvents.AFTER_TRANSLUCENT_FEATURES.register(BookmarkWorldRenderer::render);
     }
 
     private static void render(LevelRenderContext context) {
+        if (!markersVisible) return;
+
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return;
 
@@ -69,21 +80,17 @@ public class BookmarkWorldRenderer {
         double dz = bm.z + 0.5 - camPos.z;
         double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-        // Don't render if extremely far away
-        if (distance > 500) return;
-
         int color = bm.bookmarkColor != 0 ? bm.bookmarkColor : 0xFF55FFFF;
 
         // Alpha fade at great distances
-        int alpha = distance > 200 ? 0x50 : (distance > 100 ? 0x90 : 0xFF);
+        int alpha = distance > 500 ? 0x30 : (distance > 200 ? 0x50 : (distance > 100 ? 0x90 : 0xFF));
         int fadedColor = (color & 0x00FFFFFF) | (alpha << 24);
-        int bgAlpha = distance > 200 ? 0x20 : (distance > 100 ? 0x40 : 0x60);
+        int bgAlpha = distance > 500 ? 0x10 : (distance > 200 ? 0x20 : (distance > 100 ? 0x40 : 0x60));
 
         // Scale based on distance (same base as vanilla name tags: 0.025)
         float baseScale = 0.025f;
         float distScale = (float) Math.max(1.0, distance / 10.0);
         float finalScale = baseScale * distScale;
-        finalScale = Math.min(finalScale, 0.5f);
 
         // Follow vanilla NameTagFeatureRenderer transform order:
         // translate → mulPose(orientation) → scale(s, -s, s)

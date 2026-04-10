@@ -32,9 +32,10 @@ public class GatherlyMod implements ClientModInitializer {
     private static final KeyMapping.Category GATHERLY_CATEGORY =
             KeyMapping.Category.register(Identifier.fromNamespaceAndPath("gatherly", "gatherly"));
 
-    // Single keybind for K. Shift+K toggles HUD, plain K opens screen.
+    // K: open screen, Shift+K: toggle HUD, O: toggle world markers
     // These appear under "Gatherly" in Options → Controls → Key Binds.
     private static KeyMapping openKey;
+    private static KeyMapping toggleMarkersKey;
 
     private int tickCounter = 0;
     private boolean wasAlive = true;
@@ -49,6 +50,14 @@ public class GatherlyMod implements ClientModInitializer {
                 "key.gatherly.open",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_K,
+                GATHERLY_CATEGORY
+        ));
+
+        // Register keybind: O — toggle world markers
+        toggleMarkersKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "key.gatherly.toggle_markers",
+                InputConstants.Type.KEYSYM,
+                GLFW.GLFW_KEY_O,
                 GATHERLY_CATEGORY
         ));
 
@@ -72,6 +81,11 @@ public class GatherlyMod implements ClientModInitializer {
                     // K: open the Gatherly screen
                     client.setScreen(new GatherlyScreen());
                 }
+            }
+
+            // Handle O key: toggle world markers
+            while (toggleMarkersKey.consumeClick()) {
+                BookmarkWorldRenderer.toggleMarkers();
             }
 
             // Auto-count inventory scan — runs every 20 ticks (~1 second)
