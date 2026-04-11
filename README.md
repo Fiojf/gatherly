@@ -16,7 +16,7 @@ A client-side task tracker for Minecraft. Create to-do lists, track item collect
 ### Sub-Tasks
 - Nest tasks under a parent to-do
 - Each sub-task has its own targets and waypoints
-- Auto-complete or manual completion per sub-task
+- Auto-complete or manual completion per sub-task 
 
 ### Auto-Complete & Collection Tracking
 - Add item/block collection targets with a required count
