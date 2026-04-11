@@ -1,6 +1,12 @@
-# Gatherly
+<p align="center">
+  <img src="src/main/resources/assets/gatherly/icon.png" width="160" alt="Gatherly logo">
+</p>
 
-A client-side task tracker for Minecraft. Create to-do lists, track item collection progress automatically, and bookmark coordinates — all from a clean in-game UI with a compact HUD overlay.
+<h1 align="center">Gatherly</h1>
+
+<p align="center">
+  A client-side task tracker for Minecraft. Create to-do lists, track item collection progress automatically, and bookmark coordinates — all from a clean in-game UI with a compact HUD overlay.
+</p>
 
 ## Features
 
