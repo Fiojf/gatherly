@@ -79,7 +79,7 @@ A client-side task tracker for Minecraft. Create to-do lists, track item collect
 
 ## Requirements
 
-- Minecraft **26.1.1**
+- Minecraft **26.1.x**
 - [Fabric Loader](https://fabricmc.net/) 0.18.4+
 - [Fabric API](https://modrinth.com/mod/fabric-api) 0.145.4+
 - [Cloth Config](https://modrinth.com/mod/cloth-config) 26.1.154+
@@ -88,7 +88,7 @@ A client-side task tracker for Minecraft. Create to-do lists, track item collect
 
 ## Installation
 
-1. Install Fabric Loader for Minecraft 26.1.1
+1. Install Fabric Loader for Minecraft 26.1.x
 2. Download and place the required dependencies (Fabric API, Cloth Config) in your `mods/` folder
 3. Download `gatherly-x.x.x.jar` from Releases and place it in your `mods/` folder
 4. Launch the game

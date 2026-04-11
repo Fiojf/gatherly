@@ -5,7 +5,11 @@
   "name": "Gatherly",
   "description": "A polished client-side to-do list for Minecraft.",
   "authors": ["Fiojf"],
-  "contact": {},
+  "contact": {
+    "homepage": "https://github.com/Fiojf/Gatherly",
+    "sources": "https://github.com/Fiojf/Gatherly",
+    "issues": "https://github.com/Fiojf/Gatherly/issues"
+  },
 "license": "LGPL-3.0-only",
   "environment": "client",
   "entrypoints": {
