@@ -62,11 +62,6 @@ A client-side task tracker for Minecraft. Create to-do lists, track item collect
 - Adjustable panel size (30–100% width/height)
 - All settings accessible via Mod Menu
 
-### Timer
-- Per-to-do countdown timer with configurable duration
-- Start/stop from the settings panel
-- Displays remaining time (H:MM:SS)
-
 ## Controls
 
 | Key | Action |
