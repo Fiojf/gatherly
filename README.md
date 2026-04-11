@@ -8,6 +8,8 @@
   A client-side task tracker for Minecraft. Create to-do lists, track item collection progress automatically, and bookmark coordinates — all from a clean in-game UI with a compact HUD overlay.
 </p>
 
+**Disclaimer**: This mod has been made with AI assistance.
+
 ## Features
 
 ### Task Management
