@@ -125,6 +125,11 @@ public class GatherlyMod implements ClientModInitializer {
             } else {
                 wasAlive = true;
             }
+
+            // Auto-delete death waypoints when the player returns within 2 blocks
+            if (tickCounter % 10 == 0 && client.player != null && client.player.isAlive()) {
+                GatherlyManager.getInstance().purgeReachedDeathWaypoints(client.player, 2.0);
+            }
         });
 
         // Register HUD overlay renderer via HudElementRegistry (replaces deprecated HudRenderCallback)

@@ -34,6 +34,10 @@ public class GatherlyConfig implements ConfigData {
     @ConfigEntry.Category("behavior")
     public boolean worldFilteringEnabled = true;
 
+    /** When true, bookmarks are filtered by the dimension they were created in (Nether, End, Overworld). */
+    @ConfigEntry.Category("behavior")
+    public boolean dimensionFilteringEnabled = true;
+
     /** When true, a toast pops up when a to-do is auto-completed (all targets met). */
     @ConfigEntry.Category("behavior")
     public boolean notifyOnCompletion = true;

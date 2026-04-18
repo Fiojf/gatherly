@@ -16,6 +16,12 @@ public class Bookmark {
     /** World/server scope (same format as TodoItem.worldKey). Empty = global. */
     public String worldKey = "";
 
+    /** Dimension scope (e.g., "minecraft:the_nether"). Empty = all dimensions. */
+    public String dimensionKey = "";
+
+    /** True if auto-created at death. Used for auto-delete when player returns to the spot. */
+    public boolean isDeathWaypoint = false;
+
     /** Whether this bookmark is shown in the HUD overlay. */
     public boolean showInHud = true;
 

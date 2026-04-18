@@ -146,6 +146,17 @@ public class GatherlyManager {
         return "";
     }
 
+    /** Returns the current dimension identifier (e.g. "minecraft:the_nether"), or empty. */
+    public static String getCurrentDimensionKey() {
+        Minecraft client = Minecraft.getInstance();
+        if (client == null || client.player == null || client.level == null) return "";
+        try {
+            return client.level.dimension().identifier().toString();
+        } catch (Throwable t) {
+            return "";
+        }
+    }
+
     /**
      * Returns the display view: world-filtered, then sorted as
      * [active pinned, active unpinned, completed]. Completed to-dos always
@@ -378,11 +389,13 @@ public class GatherlyManager {
         return getConfig().bookmarks;
     }
 
-    /** Returns bookmarks filtered by current world (same logic as getTodos). */
+    /** Returns bookmarks filtered by current world and (optionally) current dimension. */
     public List<Bookmark> getBookmarks() {
         List<Bookmark> raw = getRawBookmarks();
         boolean worldFilter = getConfig().worldFilteringEnabled;
+        boolean dimFilter = getConfig().dimensionFilteringEnabled;
         String key = worldFilter ? getCurrentWorldKey() : null;
+        String dim = dimFilter ? getCurrentDimensionKey() : null;
 
         List<Bookmark> result = new ArrayList<>();
         for (Bookmark b : raw) {
@@ -390,6 +403,14 @@ public class GatherlyManager {
                     && b.worldKey != null
                     && !b.worldKey.isEmpty()
                     && !b.worldKey.equals(key)) {
+                continue;
+            }
+            if (dimFilter
+                    && b.dimensionKey != null
+                    && !b.dimensionKey.isEmpty()
+                    && dim != null
+                    && !dim.isEmpty()
+                    && !b.dimensionKey.equals(dim)) {
                 continue;
             }
             result.add(b);
@@ -420,6 +441,9 @@ public class GatherlyManager {
         if (bookmark.worldKey == null || bookmark.worldKey.isEmpty()) {
             bookmark.worldKey = getCurrentWorldKey();
         }
+        if (bookmark.dimensionKey == null || bookmark.dimensionKey.isEmpty()) {
+            bookmark.dimensionKey = getCurrentDimensionKey();
+        }
         getRawBookmarks().add(bookmark);
         save();
     }
@@ -445,11 +469,42 @@ public class GatherlyManager {
         Bookmark death = new Bookmark("\u2620 Death", (int) x, (int) y, (int) z);
         death.bookmarkColor = 0xFFFF5555;
         death.worldKey = getCurrentWorldKey();
+        death.dimensionKey = getCurrentDimensionKey();
         death.showWorldMarker = true;
         death.showInHud = true;
         death.markerLetter = "\u2620";
+        death.isDeathWaypoint = true;
         getRawBookmarks().add(death);
         save();
+    }
+
+    /**
+     * Removes any death waypoint the player has returned to (within {@code radius} blocks
+     * in the same dimension). Returns true if anything was removed.
+     */
+    public boolean purgeReachedDeathWaypoints(Player player, double radius) {
+        List<Bookmark> raw = getRawBookmarks();
+        if (raw.isEmpty()) return false;
+        String dim = getCurrentDimensionKey();
+        double r2 = radius * radius;
+        boolean changed = false;
+        java.util.Iterator<Bookmark> it = raw.iterator();
+        while (it.hasNext()) {
+            Bookmark b = it.next();
+            if (!b.isDeathWaypoint) continue;
+            if (b.dimensionKey != null && !b.dimensionKey.isEmpty()
+                    && dim != null && !dim.isEmpty()
+                    && !b.dimensionKey.equals(dim)) continue;
+            double dx = player.getX() - (b.x + 0.5);
+            double dy = player.getY() - (b.y + 0.5);
+            double dz = player.getZ() - (b.z + 0.5);
+            if (dx * dx + dy * dy + dz * dz <= r2) {
+                it.remove();
+                changed = true;
+            }
+        }
+        if (changed) save();
+        return changed;
     }
 
     // ── Inventory Scan (client-side, runs every 20 ticks) ───────────

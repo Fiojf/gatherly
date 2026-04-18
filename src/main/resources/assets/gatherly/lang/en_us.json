@@ -17,6 +17,8 @@
   "text.autoconfig.gatherly.option.showNearestCoordinateInHud": "Show Nearest Coordinate in HUD",
   "text.autoconfig.gatherly.option.worldFilteringEnabled": "World-Specific To-Dos",
   "text.autoconfig.gatherly.option.worldFilteringEnabled.@Tooltip": "When on, to-dos only appear in the world/server they were created in.",
+  "text.autoconfig.gatherly.option.dimensionFilteringEnabled": "Dimension-Specific Bookmarks",
+  "text.autoconfig.gatherly.option.dimensionFilteringEnabled.@Tooltip": "When on, bookmarks only appear in the dimension they were created in (Nether, End, Overworld).",
   "text.autoconfig.gatherly.option.notifyOnCompletion": "Completion Toast",
   "text.autoconfig.gatherly.option.notifyOnCompletion.@Tooltip": "Show a toast notification when an auto-complete to-do finishes.",
   "text.autoconfig.gatherly.option.completedAutoDeleteMinutes": "Auto-Delete Completed (minutes)",
